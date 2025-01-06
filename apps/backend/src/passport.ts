@@ -31,10 +31,49 @@ export function initPassport() {
                 clientSecret: GOOGLE_CLIENT_SECRET,
                 callbackURL: `${CALLBACK_URL}/auth/google/callback`,
             },
-         
+            async function(
+                accessToken : string, 
+                refreshToken : string,
+                profile : any,
+                done : (error : any, user? : any) => void
+            ) {
+
+                const user = await db.user.upsert({
+                    create : {
+                        email : profile.emails[0].value,
+                        name : profile.displayName,
+                        provider : "GOOGLE"
+                    }, 
+                    update : {
+                        name : profile.displayName
+                    },
+                    where : {
+                        email : profile.emails[0].value,
+                    }
+
+                })
+                done(null, user)
+                
+            }
             
         )
     )
+
+    passport.serializeUser(function (user : any, cb) {
+        process.nextTick(function () {
+            return cb(null, {
+                id : user.id,
+                username : user.username,
+
+            })
+        })
+    })
+
+    passport.deserializeUser(function (user: any, cb) {
+        process.nextTick(function () {
+            return cb(null, user);
+            });
+    });
 }
 
 

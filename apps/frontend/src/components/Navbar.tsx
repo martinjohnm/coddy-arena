@@ -5,7 +5,7 @@ type SelectedType = "home" | "problems" | "contests"
 export const Navbar = ({selected} : {selected : SelectedType}) => {
     return <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
     <div className="flex max-w-5xl mx-auto items-center justify-between py-4">
-      <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+      <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="https://assets.leetcode.com/static_assets/public/images/LeetCode_logo_rvs.png" className="h-8" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Codddy</span>
       </a>

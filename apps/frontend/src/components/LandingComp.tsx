@@ -3,8 +3,10 @@
 export const LandingComp = () => {
     return <div className="mx-auto container max-w-5xl">
         <div className="md:grid md:grid-cols-2 py-4 gap-2">
-            <div className="bg-red-500">
-                <img src="coding.jpeg" alt="" />
+            <div className="flex justify-center items-center">
+                <div className="w-80 h-96">
+                    <img src="coding.jpeg" alt="" />
+                </div>
             </div>
             <div className="flex justify-center items-center">
                 <div className="items-center justify-center  p-6">
@@ -20,7 +22,6 @@ export const LandingComp = () => {
                         <button className="bg-green-400 p-2 rounded-2xl">Create Account</button>
                     </div>
                 </div>
-              
             </div>
         </div>
         

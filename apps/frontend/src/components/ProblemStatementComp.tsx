@@ -1,11 +1,11 @@
 
 interface ProblemStatementType {
     title : string;
-    id : string
+    id? : string
     description : string
 }
 
-export const ProblemStatementComp = ({title, id, description} : ProblemStatementType) => {
+export const ProblemStatementComp = ({title,description} : ProblemStatementType) => {
     return <div className="p-2">
         <div className="grid grid-cols-3 rounded py-2">
             <div className="col-span-1 flex justify-start items-center">

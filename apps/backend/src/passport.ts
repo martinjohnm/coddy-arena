@@ -1,6 +1,6 @@
 import { configDotenv } from "dotenv";
 import passport from "passport";
-import db from "@repo/db/src/index"
+import db from "@repo/db/client"
 
 
 const GoogleStrategy = require("passport-google-oauth20").Strategy;

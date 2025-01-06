@@ -6,6 +6,9 @@ import cookieParser from "cookie-parser"
 import session from "express-session";
 import cors from "cors"
 import { COOKIE_MAX_AGE } from "./consts";
+import { initPassport } from "./passport";
+import passport from "passport";
+
 
 const app = express();
 configDotenv()
@@ -20,6 +23,11 @@ app.use(
         cookie : { secure : false, maxAge : COOKIE_MAX_AGE}
     })
 )
+initPassport()
+app.use(passport.initialize())
+app.use(passport.authenticate("session"))
+
+
 const allowedHosts = process.env.ALLOWED_HOSTS
   ? process.env.ALLOWED_HOSTS.split(',')
   : [];

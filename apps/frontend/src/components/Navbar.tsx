@@ -22,7 +22,7 @@ export const Navbar = ({selected} : {selected : SelectedType}) => {
             <a href="/contests" className={`block py-2 px-3 ${selected == "contests" ? "text-blue-400" : "text-white"}`}>Contest</a>
           </li>
           <li>
-            <a href="#" className={`block py-2 px-3 text-white`}>Login</a>
+            <a href="/login" className={`block py-2 px-3 text-white`}>Login</a>
           </li>
         </ul>
       </div>

@@ -40,20 +40,7 @@ router.get('/refresh', async (req: Request, res: Response) => {
         id: user.id,
         name: userDb?.name,
       });
-    }else if (req.cookies && req.cookies.guest) {
-        const decoded = jwt.verify(req.cookies.guest, JWT_SECRET) as userJwtClaims;
-        const token = jwt.sign(
-          { userId: decoded.userId, name: decoded.name, isGuest: true },
-          JWT_SECRET,
-        );
-        let User: UserDetails = {
-          id: decoded.userId,
-          name: decoded.name,
-          token: token,
-          isGuest: true,
-        };
-        res.cookie('guest', token, { maxAge: COOKIE_MAX_AGE });
-        res.json(User);
+    
     } else {
       res.status(401).json({ success: false, message: 'Unauthorized' });
     }

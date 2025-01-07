@@ -9,6 +9,7 @@ import { COOKIE_MAX_AGE } from "./consts";
 import { initPassport } from "./passport";
 import passport from "passport";
 import authRoute from "./router/auth"
+import problemsRoute from "./router/problems"
 
 const app = express();
 configDotenv()
@@ -41,7 +42,7 @@ app.use(
 );
 
 app.use('/auth', authRoute);
-
+app.use("/problem",problemsRoute)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

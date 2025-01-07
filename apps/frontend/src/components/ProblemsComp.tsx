@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 
 export const ProblemsComp = () => {
-    return <div className="mx-auto container max-w-5xl">
+    return <div className="mx-auto container max-w-5xl px-4">
         <div className="">
             <p className="text-3xl py-4">Problems</p>
         </div>

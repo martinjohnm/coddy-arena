@@ -3,11 +3,15 @@ import passport from "passport";
 import db from "@repo/db/client"
 
 
+
+configDotenv();
+
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const CALLBACK_URL = process.env.BACKEND_URL
 
+console.log("callback url",CALLBACK_URL);
 
-configDotenv();
+
 const GOOGLE_CLIENT_ID =
   process.env.GOOGLE_CLIENT_ID || 'your_google_client_id';
 const GOOGLE_CLIENT_SECRET =
@@ -42,7 +46,8 @@ export function initPassport() {
                     create : {
                         email : profile.emails[0].value,
                         name : profile.displayName,
-                        provider : "GOOGLE"
+                        provider : "GOOGLE",
+                        lastLogin : new Date()
                     }, 
                     update : {
                         name : profile.displayName

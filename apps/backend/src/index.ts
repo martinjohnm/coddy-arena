@@ -8,7 +8,7 @@ import cors from "cors"
 import { COOKIE_MAX_AGE } from "./consts";
 import { initPassport } from "./passport";
 import passport from "passport";
-
+import authRoute from "./router/auth"
 
 const app = express();
 configDotenv()
@@ -39,6 +39,8 @@ app.use(
         credentials: true
     })
 );
+
+app.use('/auth', authRoute);
 
 
 const PORT = process.env.PORT || 3000;

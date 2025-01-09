@@ -1,6 +1,8 @@
 
 
 export const LandingComp = () => {
+    
+
     return <div className="mx-auto container max-w-5xl">
         <div className="md:grid md:grid-cols-2 py-4 gap-2">
             <div className="flex justify-center items-center">

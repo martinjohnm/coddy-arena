@@ -1,12 +1,13 @@
 import { Router, Request, Response } from "express";
 import passport from "passport";
-import { authRefresh } from "../controllers/user/authController";
+import { authRefresh, verifyEmail } from "../controllers/user/authController";
 
 const router = Router()
 
 const CLIENT_URL = process.env.FRONTEND_URL ?? 'http://localhost:5173';
 
 router.get('/refresh', authRefresh);
+router.get('/verify', verifyEmail);
 
 router.get(
     '/google',

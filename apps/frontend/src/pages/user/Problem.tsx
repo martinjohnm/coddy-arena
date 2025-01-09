@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { CodeEditorComp } from "../components/CodeEditorComp";
-import { ProblemStatementComp } from "../components/ProblemStatementComp";
+import { CodeEditorComp } from "../../components/user/CodeEditorComp";
+import { ProblemStatementComp } from "../../components/user/ProblemStatementComp";
 
 
 

@@ -19,5 +19,10 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "nodemailer": "^6.9.16",
+    "react-router-dom": "^7.1.1"
+  }
 }

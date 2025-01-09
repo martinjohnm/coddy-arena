@@ -1,5 +1,5 @@
-import { ContestComp } from "../components/ContestCompt"
-import { Navbar } from "../components/Navbar"
+import { ContestComp } from "../../components/user/ContestCompt"
+import { Navbar } from "../../components/user/Navbar"
 
 
 

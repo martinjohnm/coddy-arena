@@ -1,5 +1,5 @@
-import { LandingComp } from "../components/LandingComp"
-import { Navbar } from "../components/Navbar"
+import { LandingComp } from "../../components/user/LandingComp"
+import { Navbar } from "../../components/user/Navbar"
 
 
 

@@ -1,6 +1,7 @@
 import { configDotenv } from "dotenv";
 import passport from "passport";
 import db from "@repo/db/client"
+import { sendVerificationEmail } from "./utils/NodeMailer";
 
 
 
@@ -57,6 +58,8 @@ export function initPassport() {
                     }
 
                 })
+
+                
                 done(null, user)
                 
             }

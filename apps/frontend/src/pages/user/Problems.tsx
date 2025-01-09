@@ -1,5 +1,5 @@
-import { Navbar } from "../components/Navbar"
-import { ProblemsComp } from "../components/ProblemsComp"
+import { Navbar } from "../../components/user/Navbar"
+import { ProblemsComp } from "../../components/user/ProblemsComp"
 
 
 

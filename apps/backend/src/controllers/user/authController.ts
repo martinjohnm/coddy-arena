@@ -35,3 +35,21 @@ export const authRefresh = async (req: Request, res: Response) => {
       res.status(401).json({ success: false, message: 'Unauthorized' });
     }
 }
+
+export const verifyEmail = async (req : Request, res : Response) => {
+   
+  const { email } = req.query;
+
+  const user = await db.user.findFirst({
+    where : {
+      email : String(email)
+    }
+  })
+
+  if (user) {
+    user.isVerified = true; // Mark user as verified
+    res.send("Your email has been verified! You can now access the dashboard.");
+  } else {
+    res.status(400).send("Invalid verification link.");
+  }
+}

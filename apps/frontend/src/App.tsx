@@ -3,10 +3,10 @@ import { Problem } from "./pages/user/Problem"
 import { Login } from "./pages/user/Login"
 import ProtectedRoute from "./protection/protectUser"
 import { UserLayout } from "./pages/user/UserLayout"
-import { LandingComp } from "./components/user/LandingComp"
-import { ProblemsComp } from "./components/user/ProblemsComp"
-import { ContestComp } from "./components/user/ContestCompt"
 import AuthUserRoute from "./protection/authUser"
+import { Landing } from "./pages/user/Landing"
+import { Problems } from "./pages/user/Problems"
+import { Contest } from "./pages/user/Contest"
 
 
 
@@ -19,9 +19,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<UserLayout/>}>
-              <Route index element={<ProtectedRoute><LandingComp/></ProtectedRoute>}/>
-              <Route path="/problems" element={<ProtectedRoute><ProblemsComp/></ProtectedRoute>}/>
-              <Route path="/contests" element={<ProtectedRoute><ContestComp/></ProtectedRoute>}/>
+              <Route index element={<ProtectedRoute><Landing/></ProtectedRoute>}/>
+              <Route path="/problems" element={<ProtectedRoute><Problems/></ProtectedRoute>}/>
+              <Route path="/contests" element={<ProtectedRoute><Contest/></ProtectedRoute>}/>
               <Route path="/problem/:id" element={<ProtectedRoute><Problem/></ProtectedRoute>}/>
               
             </Route>

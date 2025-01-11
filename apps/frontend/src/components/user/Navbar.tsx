@@ -3,6 +3,8 @@ type SelectedType = "home" | "problems" | "contests"
 
 
 export const Navbar = ({selected} : {selected : SelectedType}) => {
+
+
     return <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 px-4">
     <div className="flex max-w-5xl mx-auto items-center justify-between py-4">
       <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -22,7 +24,10 @@ export const Navbar = ({selected} : {selected : SelectedType}) => {
             <a href="/contests" className={`block py-2 px-3 ${selected == "contests" ? "text-blue-400" : "text-white"}`}>Contest</a>
           </li>
           <li>
-            <a href="/login" className={`block py-2 px-3 text-white`}>Login</a>
+            
+              <a href="/login" className={`block py-2 px-3 text-white`}>Login</a>
+          
+            
           </li>
         </ul>
       </div>

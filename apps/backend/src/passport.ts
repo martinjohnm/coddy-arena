@@ -1,9 +1,9 @@
 import { configDotenv } from "dotenv";
 import passport from "passport";
 import db from "@repo/db/client"
-import { sendVerificationEmail } from "./utils/NodeMailer";
-
-
+import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcryptjs"
+import { generateAndGetToken } from "./utils/generateAndGetToken";
 
 configDotenv();
 
@@ -66,6 +66,34 @@ export function initPassport() {
             
         )
     )
+
+    passport.use(
+        new LocalStrategy(
+          { usernameField: "email" ,
+          },
+
+          async (email, password, done) => {
+            try {
+              const user = await db.user.findFirst({
+                where : {
+                    email
+                }
+              })
+             
+              if (!user) return done(null, false, { message: "User not found" });
+     
+              const isValid = await bcrypt.compare(password, String(user.password))
+       
+              
+              if (!isValid) return done(null, false, { message: "Invalid password" });
+        
+              done(null, user);
+            } catch (err) {
+              done(err);
+            }
+          }
+        )
+      );
 
     passport.serializeUser(function (user : any, cb) {
         process.nextTick(function () {

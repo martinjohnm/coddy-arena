@@ -2,8 +2,10 @@
 import { Request, Response } from "express";
 import db from "@repo/db/client"
 import jwt from "jsonwebtoken";
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+import bcrypt from "bcryptjs"
+import { getUserFromToken } from "../../utils/generateAndGetToken";
 
+const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 
 interface UserDetails {
     id: number;
@@ -29,10 +31,11 @@ export const authRefresh = async (req: Request, res: Response) => {
         token ,
         id: user.id,
         name: userDb?.name,
+        success : true
       });
     
     } else {
-      res.status(401).json({ success: false, message: 'Unauthorized' });
+      res.json({ success: false, message: 'Unauthorized' });
     }
 }
 
@@ -52,4 +55,118 @@ export const verifyEmail = async (req : Request, res : Response) => {
   } else {
     res.status(400).send("Invalid verification link.");
   }
+}
+
+export const userRegister = async (req : Request, res : Response) => {
+  try {
+      
+
+      const {password, confirmPassword,email} = req.body
+
+      if (password !== confirmPassword) {
+          res.status(400).json(
+              {
+                  success : false,
+                  error : "Passwords don't match"
+              })
+          return
+      }
+
+      const existingUser = await db.user.findFirst({
+          where : {
+              email
+          }
+      })
+
+      if (existingUser && existingUser.provider == "EMAIL"){
+          res.status(400).json(
+              {
+                  success : false,
+                  error : "Email already registered"
+              })
+          return
+      }
+
+
+      const hashedPassword = await bcrypt.hash(password, 10)
+
+      const newUser = await db.user.upsert({
+          create : {
+            email,
+            password : hashedPassword,
+            provider : "EMAIL"
+
+          },
+          update : {
+            provider : "EMAIL",
+            password : hashedPassword
+          },
+          where : {
+            email
+          }
+      })
+      res.status(200).json({
+          data : {
+              id : newUser.id,
+              email : newUser.email
+          },
+
+          success : true,
+          message : "User created successfully!"
+      })
+    
+  } catch(error) {
+      let message
+      if (error instanceof Error) message = error.message
+      else message = String(error)
+      console.log("Error during signup",  message); 
+      res.status(500).json(
+          {
+              success : false,
+              error : "Internal server error"
+          })
+      
+  }
+}
+
+
+
+export const getUser = async (req : Request, res : Response) => {
+   
+  const cookieToken = req.cookies["coddy-cookie"]
+
+
+  const user = getUserFromToken(cookieToken)
+  console.log(user);
+  
+  if (!user) {
+    res.json({
+      success : false,
+      message : "not logged in"
+    })
+  } else {
+    res.json({
+      success : true,
+      message : "success"
+    })
+  }
+
+}
+
+
+export const logoutUser = async (req : Request, res : Response) => {
+   
+
+  req.logout((err) => {
+    if (err) {
+      res.status(500).json({ error: 'Failed to log out' });
+    } else {
+      res.clearCookie("coddy-cookie")
+      res.status(200).json({
+        message : "Logged out successfully",
+        success : true
+      })
+    }
+  })
+
 }

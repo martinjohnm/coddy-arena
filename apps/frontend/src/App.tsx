@@ -1,14 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Landing } from "./pages/user/Landing"
-import { Problems } from "./pages/user/Problems"
-import { Contest } from "./pages/user/Contest"
 import { Problem } from "./pages/user/Problem"
 import { Login } from "./pages/user/Login"
-import { DashboardPageAdmin } from "./pages/admin/DashboardPageAdmin"
-import { ProblemsPageAdmin } from "./pages/admin/ProblemsPageAdmin"
-import { UsersPageAdmin } from "./pages/admin/UsersPageAdmin"
-import { ContestsPageAdmin } from "./pages/admin/ContestsPageAdmin"
-import { ReportsPageAdmin } from "./pages/admin/ReportsPageAdmin"
 import ProtectedRoute from "./protection/protectUser"
 import { UserLayout } from "./pages/user/UserLayout"
 import { LandingComp } from "./components/user/LandingComp"
@@ -35,7 +27,16 @@ function App() {
             </Route>
             <Route path="/login" element={<AuthUserRoute><Login/></AuthUserRoute>}/>
             <Route path="/login/failed" element={<Login/>}/>
-              {/* <Route path="/" element={<ProtectedRoute><Landing/></ProtectedRoute>}/>
+             
+          </Routes>
+        </BrowserRouter>
+    </div>
+  )
+}
+
+export default App
+
+ {/* <Route path="/" element={<ProtectedRoute><Landing/></ProtectedRoute>}/>
               <Route path="/problems" element={<ProtectedRoute><Problems/></ProtectedRoute>}/>
               <Route path="/contests" element={<ProtectedRoute><Contest/></ProtectedRoute>}/>
               <Route path="/problem/:id" element={<ProtectedRoute><Problem/></ProtectedRoute>}/>
@@ -47,10 +48,3 @@ function App() {
               <Route path="/admin-users" element={<UsersPageAdmin/>}/>
               <Route path="/admin-contests" element={<ContestsPageAdmin/>}/>
               <Route path="/admin-reports" element={<ReportsPageAdmin/>}/> */}
-          </Routes>
-        </BrowserRouter>
-    </div>
-  )
-}
-
-export default App

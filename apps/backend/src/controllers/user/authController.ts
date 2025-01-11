@@ -9,8 +9,8 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 
 interface UserDetails {
     id: number;
-    token?: string;
-    name: string;
+
+    email: string;
     isGuest?: boolean;
 }
 
@@ -136,18 +136,28 @@ export const getUser = async (req : Request, res : Response) => {
   const cookieToken = req.cookies["coddy-cookie"]
 
 
-  const user = getUserFromToken(cookieToken)
-  console.log(user);
+  const userFromCookie = getUserFromToken(cookieToken)
+  const userInSession = req.user as UserDetails
   
-  if (!user) {
+  console.log(userFromCookie, userInSession);
+  
+
+  
+  if (!userFromCookie || !userInSession) {
     res.json({
       success : false,
       message : "not logged in"
     })
-  } else {
+  
+  } else if (userFromCookie.id != (userInSession.id)){
+    res.json({
+      success : false,
+      message : "not logged in"
+    })
+  } else  {
     res.json({
       success : true,
-      message : "success"
+      message : "Logged in successfully"
     })
   }
 
@@ -156,17 +166,33 @@ export const getUser = async (req : Request, res : Response) => {
 
 export const logoutUser = async (req : Request, res : Response) => {
    
+  try {
 
-  req.logout((err) => {
-    if (err) {
-      res.status(500).json({ error: 'Failed to log out' });
-    } else {
-      res.clearCookie("coddy-cookie")
-      res.status(200).json({
-        message : "Logged out successfully",
-        success : true
+      req.logout((err) => {
+        if (err) {
+          res.status(500).json({ message: 'Failed to log out', success : false });
+          return
+        } else {
+          res.clearCookie("coddy-cookie")
+          res.status(200).json({
+            message : "Logged out successfully",
+            success : true
+          })
+          return
+        }
       })
-    }
-  })
+
+      
+  } catch(error) {
+      let message
+      if (error instanceof Error) message = error.message
+      else message = String(error)
+      console.log("Error during Logout",  message); 
+      res.status(500).json(
+          {
+              success : false,
+              error : "Internal server error"
+          })
+}
 
 }

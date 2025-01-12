@@ -7,6 +7,12 @@ import AuthUserRoute from "./protection/authUser"
 import { Landing } from "./pages/user/Landing"
 import { Problems } from "./pages/user/Problems"
 import { Contest } from "./pages/user/Contest"
+import { DashboardPageAdmin } from "./pages/admin/DashboardPageAdmin"
+import { AdminLayout } from "./pages/admin/AdminLayout"
+import { ProblemsPageAdmin } from "./pages/admin/ProblemsPageAdmin"
+import { ContestsPageAdmin } from "./pages/admin/ContestsPageAdmin"
+import { ReportsPageAdmin } from "./pages/admin/ReportsPageAdmin"
+import { UsersPageAdmin } from "./pages/admin/UsersPageAdmin"
 
 
 
@@ -27,7 +33,16 @@ function App() {
             </Route>
             <Route path="/login" element={<AuthUserRoute><Login/></AuthUserRoute>}/>
             <Route path="/login/failed" element={<Login/>}/>
-             
+            
+    
+            <Route path="/" element={<AdminLayout/>}>
+              <Route path="/admin-dashboard" element={<DashboardPageAdmin/>}/>
+              <Route path="/admin-problems" element={<ProblemsPageAdmin/>}/>
+              <Route path="/admin-users" element={<UsersPageAdmin/>}/>
+              <Route path="/admin-contests" element={<ContestsPageAdmin/>}/>
+              <Route path="/admin-reports" element={<ReportsPageAdmin/>}/>
+            </Route>
+
           </Routes>
         </BrowserRouter>
     </div>

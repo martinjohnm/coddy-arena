@@ -21,45 +21,39 @@ import { UsersPageAdmin } from "./pages/admin/UsersPageAdmin"
 function App() {
 
   return (
-    <div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<UserLayout/>}>
-              <Route index element={<ProtectedRoute><Landing/></ProtectedRoute>}/>
-              <Route path="/problems" element={<ProtectedRoute><Problems/></ProtectedRoute>}/>
-              <Route path="/contests" element={<ProtectedRoute><Contest/></ProtectedRoute>}/>
-              <Route path="/problem/:id" element={<ProtectedRoute><Problem/></ProtectedRoute>}/>
-              
-            </Route>
-            <Route path="/login" element={<AuthUserRoute><Login/></AuthUserRoute>}/>
-            <Route path="/login/failed" element={<Login/>}/>
-            
-    
-            <Route path="/" element={<AdminLayout/>}>
-              <Route path="/admin-dashboard" element={<DashboardPageAdmin/>}/>
-              <Route path="/admin-problems" element={<ProblemsPageAdmin/>}/>
-              <Route path="/admin-users" element={<UsersPageAdmin/>}/>
-              <Route path="/admin-contests" element={<ContestsPageAdmin/>}/>
-              <Route path="/admin-reports" element={<ReportsPageAdmin/>}/>
-            </Route>
 
-          </Routes>
-        </BrowserRouter>
-    </div>
+    <AuthApp/>
+
+  )
+}
+
+function AuthApp () {
+  return (
+
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<UserLayout/>}>
+        <Route index element={<ProtectedRoute><Landing/></ProtectedRoute>}/>
+        <Route path="/problems" element={<ProtectedRoute><Problems/></ProtectedRoute>}/>
+        <Route path="/contests" element={<ProtectedRoute><Contest/></ProtectedRoute>}/>
+        <Route path="/problem/:id" element={<ProtectedRoute><Problem/></ProtectedRoute>}/>
+        
+      </Route>
+      <Route path="/login" element={<AuthUserRoute><Login/></AuthUserRoute>}/>
+      <Route path="/login/failed" element={<Login/>}/>
+      
+
+      <Route path="/" element={<AdminLayout/>}>
+        <Route path="/admin-dashboard" element={<DashboardPageAdmin/>}/>
+        <Route path="/admin-problems" element={<ProblemsPageAdmin/>}/>
+        <Route path="/admin-users" element={<UsersPageAdmin/>}/>
+        <Route path="/admin-contests" element={<ContestsPageAdmin/>}/>
+        <Route path="/admin-reports" element={<ReportsPageAdmin/>}/>
+      </Route>
+
+    </Routes>
+  </BrowserRouter>
   )
 }
 
 export default App
-
- {/* <Route path="/" element={<ProtectedRoute><Landing/></ProtectedRoute>}/>
-              <Route path="/problems" element={<ProtectedRoute><Problems/></ProtectedRoute>}/>
-              <Route path="/contests" element={<ProtectedRoute><Contest/></ProtectedRoute>}/>
-              <Route path="/problem/:id" element={<ProtectedRoute><Problem/></ProtectedRoute>}/>
-              <Route path="/login" element={<Login/>}/>
-              <Route path="/login/failed" element={<Login/>}/>
-
-              <Route path="/admin-dashboard" element={<DashboardPageAdmin/>}/>
-              <Route path="/admin-problems" element={<ProblemsPageAdmin/>}/>
-              <Route path="/admin-users" element={<UsersPageAdmin/>}/>
-              <Route path="/admin-contests" element={<ContestsPageAdmin/>}/>
-              <Route path="/admin-reports" element={<ReportsPageAdmin/>}/> */}
